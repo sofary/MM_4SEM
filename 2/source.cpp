@@ -101,6 +101,7 @@ void CQueue::out()
 
 
 
+
 ///////////////////////////
 //functions without class//
 ///////////////////////////
@@ -280,8 +281,55 @@ Child2::Child2(char* n) :CQueue(n) {}
 }
 
 
-Child2::Child2(const CQueue &otherQueue):CQueue (otherQueue)
-{}
+Child2::Child2(const CQueue &otherQueue):CQueue (otherQueue){}
+
+
+//peremesh'enie
+CQueue::CQueue(CQueue &&arr): 
+Q(arr.Q), 
+name(arr.name)
+{     	
+	arr.Del();
+	arr.name=nullptr;
+}
+
+//copy
+CQueue::CQueue(const CQueue &otherQueue)
+{
+Q=otherQueue.Q;
+name=new char[7]{'2','2','.','t','x','t','\0'};
+name[0]=(name[0]-'0')+(otherQueue.name[0]-'0')+'0';
+name[1]=(name[1]-'0')+(otherQueue.name[1]-'0')+'0';
+
+}
+
+////////////////////////////////////////
+
+CQueue& CQueue::operator=(CQueue &&arr) 
+{
+    //cout<<"abcd";
+    this->Del();
+    Q=arr.Q;
+    arr.Del();
+    return *this;
+}
+
+CQueue&  CQueue::operator=(const  CQueue &obj)
+    {
+//cout<<"=copy"<<endl;   
+	if(this==&obj)
+		return *this;
+        this->Del();
+
+	Q=obj.Q;
+	delete []name;
+	name= new char[7];
+	for(int i=0;i<7;i++)
+		name[i]=obj.name[i];
+this->out();
+return *this;
+    }
+//////////////////////////////////////
 
 Child1 operator+(const CQueue &obj1, const CQueue &obj2)
 {
@@ -316,21 +364,4 @@ int usless1=0, usless2=0;
 
 
 
-//peremesh'enie
-CQueue::CQueue(CQueue &&arr): 
-Q(arr.Q), 
-name(arr.name)
-{     	
-	arr.Del();
-	arr.name=nullptr;
-}
 
-//copy
-CQueue::CQueue(const CQueue &otherQueue)
-{
-Q=otherQueue.Q;
-name=new char[7]{'2','2','.','t','x','t','\0'};
-name[0]=(name[0]-'0')+(otherQueue.name[0]-'0')+'0';
-name[1]=(name[1]-'0')+(otherQueue.name[1]-'0')+'0';
-
-}

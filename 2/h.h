@@ -40,33 +40,8 @@ class CQueue
     int back();
     int size();
     CQueue(const CQueue &obj);
-
-
-//= peemesh'enie
-CQueue& operator=(CQueue &&arr) 
-{
-    //cout<<"abcd";
-    this->Del();
-    Q=arr.Q;
-    arr.Del();
-    return *this;
-}
-
-    CQueue&  operator=(const  CQueue &obj)
-    {
-//cout<<"=copy"<<endl;   
-	if(this==&obj)
-		return *this;
-        this->Del();
-
-	Q=obj.Q;
-	delete []name;
-	name= new char[7];
-	for(int i=0;i<7;i++)
-		name[i]=obj.name[i];
-this->out();
-return *this;
-    }
+    CQueue& operator=(CQueue &&arr);//= peemesh'enie
+    CQueue&  operator=(const  CQueue &obj);
     static CQueue* CreateData(int Type,  Factory **);
 };
 /////////////////
