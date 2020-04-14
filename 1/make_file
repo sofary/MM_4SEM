@@ -1,0 +1,6 @@
+a.out:source.o main.o
+	g++ -fno-elide-constructors -std=c++11  main.o source.o
+main.o:main.cpp h.h
+	g++ -fno-elide-constructors -std=c++11 -c main.cpp -o main.o
+source.o:source.cpp h.h
+	g++ -fno-elide-constructors -std=c++11 -c source.cpp -o source.o
