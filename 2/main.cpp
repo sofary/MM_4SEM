@@ -1,10 +1,5 @@
 #include "h.h"
 
-char * get_line(FILE *fp, int *err);
-int* Get_Mas(FILE* fp,int &nn, int &err, char* l);
-int Get_CQueue(FILE* fp, int n,CQueue** t, Factory *f1, Factory *f2);
-
-
 int main()
 {
   Factory *f[2]={new FactoryChild1(),new FactoryChild2()};
@@ -30,7 +25,7 @@ int main()
   Child2 pp;
   cout<<endl<<"all queue before shift"<<endl;
   for(int y=0;y<n;y++)
-	{t[y]->out(); }
+	t[y]->out();
 cout<<endl<<"_____________________________________"<<endl;
 	Child1 tmp=*t[0]; 
 

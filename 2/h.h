@@ -6,35 +6,35 @@
 #include <cstring>
 #include <math.h>
 #include <cstdlib>
+#include <vector>
+#include <queue>
 
 
 using namespace std;
 
+
+
 struct Factory;
+
 
 //////////////
 //BASE CLASS//
 //////////////
 class CQueue
 {public :
-    int dlin;
-    int *queue;
-    int frnt;
-    int rear;
+    queue<int> Q;
     char* name;
-    int calk;
 
-    CQueue() ;
+    CQueue();
     virtual ~CQueue() ;
-    CQueue(int s, char* n) ;
+    CQueue(char* n) ;
     CQueue(CQueue &&arr);
     int push ( int num ) ;
     int pop(int &num);
     virtual void out();
     virtual void out_file()=0;
-    void Init(int* arr,int NN, int DDlin, int d);
-    int next(int &i,int &number);
-    int now(int &i,int &number);
+    void Init(int* arr,int NN, int d);
+    void Del();
     int isempty();
     int front();
     int back();
@@ -43,19 +43,12 @@ class CQueue
 
 
 //= peemesh'enie
-	CQueue& operator=(CQueue &&arr) 
-	{
+CQueue& operator=(CQueue &&arr) 
+{
     //cout<<"abcd";
-    delete []queue;
-    dlin=arr.dlin;
-    queue=arr.queue;
-    frnt=arr.frnt;
-    rear=arr.rear;
-    name=arr.name;
-    calk=arr.calk;
-
-    arr.queue=nullptr;
-    arr.name=nullptr;
+    this->Del();
+    Q=arr.Q;
+    arr.Del();
     return *this;
 }
 
@@ -64,15 +57,9 @@ class CQueue
 //cout<<"=copy"<<endl;   
 	if(this==&obj)
 		return *this;
-        delete[] queue;
+        this->Del();
 
-	frnt=obj.frnt;
-	rear=obj.rear;
-	dlin=obj.dlin;
-	calk=obj.calk;
-	queue=new int[dlin];
-	for(int i=0;i<dlin;i++)
-		queue[i]=obj.queue[i];
+	Q=obj.Q;
 	delete []name;
 	name= new char[7];
 	for(int i=0;i<7;i++)
@@ -90,7 +77,7 @@ class Child1 :public CQueue
 {
     public :
     Child1() ;
-    Child1(int s, char* n) ;
+    Child1(char* n) ;
     void out_file();
     Child1(const CQueue &obj);
  } ;
@@ -102,7 +89,7 @@ class Child2 :public CQueue
 {
     public :
     Child2() ;
-    Child2(int s, char* n) ;
+    Child2(char* n) ;
     void out_file();
     Child2(const CQueue &obj);
  } ;
@@ -124,6 +111,11 @@ struct FactoryChild2:public Factory{
 		return new Child2;
 	}
 };
+
+
+char * get_line(FILE *fp, int *err);
+int* Get_Mas(FILE* fp,int &nn, int &err, char* l);
+int Get_CQueue(FILE* fp, int n,CQueue** t, Factory *f1, Factory *f2);
 
 
 
