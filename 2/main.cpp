@@ -1,27 +1,14 @@
 #include "h.h"
 
 int main()
-{
+{//////////на первой строке нет числа очередей и 3е число не отвечает за длину
   Factory *f[2]={new FactoryChild1(),new FactoryChild2()};
   CQueue **t;
-  int n, m=0, err=2, nn,  usless;
   int *x;
-  FILE* fp=fopen("max.txt","r"); 
 
-  char* line=get_line(fp,&err);
-  if(err!=2) return 0;
-  x =Get_Mas(fp,m,err, line);
-  if(m!=0) n=x[0];
-  else return 0;
-  t=new CQueue*[n]; 
-
-
-  delete[] line;
-  delete[] x;
-
-  if(Get_CQueue(fp, n, &*t, f[0], f[1])==0) return 0;
-
-
+  int n=Get_CQueue(&*t, f[0], f[1]); 
+  
+  if(n==-1) return 0;
   Child2 pp;
   cout<<endl<<"all queue before shift"<<endl;
   for(int y=0;y<n;y++)

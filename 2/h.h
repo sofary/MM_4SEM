@@ -1,5 +1,6 @@
 #pragma once
 #include <fstream>
+#include <istream>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,6 +9,8 @@
 #include <cstdlib>
 #include <vector>
 #include <queue>
+#include <string>
+#include <sstream>
 
 
 using namespace std;
@@ -23,17 +26,17 @@ struct Factory;
 class CQueue
 {public :
     queue<int> Q;
-    char* name;
+    string name;
 
     CQueue();
     virtual ~CQueue() ;
-    CQueue(char* n) ;
+    CQueue(string n) ;
     CQueue(CQueue &&arr);
     int push ( int num ) ;
     int pop(int &num);
     virtual void out();
     virtual void out_file()=0;
-    void Init(int* arr,int NN, int d);
+    void Init(vector<int> arr,int NN);
     void Del();
     int isempty();
     int front();
@@ -52,7 +55,7 @@ class Child1 :public CQueue
 {
     public :
     Child1() ;
-    Child1(char* n) ;
+    Child1(string n) ;
     void out_file();
     Child1(const CQueue &obj);
  } ;
@@ -64,7 +67,7 @@ class Child2 :public CQueue
 {
     public :
     Child2() ;
-    Child2(char* n) ;
+    Child2(string n) ;
     void out_file();
     Child2(const CQueue &obj);
  } ;
@@ -87,10 +90,10 @@ struct FactoryChild2:public Factory{
 	}
 };
 
-
-char * get_line(FILE *fp, int *err);
-int* Get_Mas(FILE* fp,int &nn, int &err, char* l);
-int Get_CQueue(FILE* fp, int n,CQueue** t, Factory *f1, Factory *f2);
+void pop_front(std::vector<int> &v);
+vector<vector<int>> read_vectors(istream &is);
+vector<int> read_vector(istream &is);
+int Get_CQueue(CQueue** t, Factory *f1, Factory *f2);
 
 
 
