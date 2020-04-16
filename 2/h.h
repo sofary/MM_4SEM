@@ -93,7 +93,7 @@ struct FactoryChild2:public Factory{
 void pop_front(std::vector<int> &v);
 vector<vector<int>> read_vectors(istream &is);
 vector<int> read_vector(istream &is);
-int Get_CQueue(CQueue** t, Factory *f1, Factory *f2);
+vector<CQueue> Get_CQueue(Factory *f1, Factory *f2, int& n);
 
 
 

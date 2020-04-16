@@ -139,17 +139,20 @@ void pop_front(std::vector<int> &v)
 
 
 
-int Get_CQueue(CQueue** t, Factory *f1, Factory *f2)
+vector<CQueue> Get_CQueue( Factory *f1, Factory *f2, int& n)//vector<CQueue>& t,
 {
   Factory *ff[2]={f1,f2};
+  Child1 x;
   vector<int> tmp;
   int file, type;
   ifstream is("max.txt");
   int counter=-1;
-  string line;
   vector<vector<int>> data;
   data=read_vectors(is);
-  for(int i=0;i<data.size(); i++)
+//первый вектор - одно число очередей в файле
+  n=data[0][0];
+  vector<CQueue> t=vector<CQueue>(3);
+  for(int i=0;i<data.size()-1; i++)
   {
 	counter++;
 	tmp=data[i];//vector for this queue
@@ -157,13 +160,15 @@ int Get_CQueue(CQueue** t, Factory *f1, Factory *f2)
 	file=tmp[1];
 	pop_front(tmp);
 	pop_front(tmp);
+	//cout<<endl<<"WHY???"<<endl;
+	//t.push_back(x);
+	t[counter]=*CQueue::CreateData(type,ff);//create queue
 	cout<<endl<<"WHY???"<<endl;
-	t[counter]=CQueue::CreateData(type,ff);//create queue
-	t[counter]->Init(tmp,file);
+	t[counter].Init(tmp,file);
   }
-  if(counter==-1) return 0;
+  //if(counter==-1) return 0;
   
-  return counter;
+  return t;
 }
 /////////////////////////////////////////
 
