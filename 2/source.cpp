@@ -139,7 +139,7 @@ void pop_front(std::vector<int> &v)
 
 
 
-vector<CQueue> Get_CQueue( Factory *f1, Factory *f2, int& n)//vector<CQueue>& t,
+vector<CQueue*> Get_CQueue( Factory *f1, Factory *f2, int& n)//vector<CQueue>& t,
 {
   Factory *ff[2]={f1,f2};
   Child1 x;
@@ -151,7 +151,7 @@ vector<CQueue> Get_CQueue( Factory *f1, Factory *f2, int& n)//vector<CQueue>& t,
   data=read_vectors(is);
 //первый вектор - одно число очередей в файле
   n=data[0][0];
-  vector<CQueue> t=vector<CQueue>(3);
+  vector<CQueue*> t=vector<CQueue*>(n);
   for(int i=0;i<data.size()-1; i++)
   {
 	counter++;
@@ -162,9 +162,9 @@ vector<CQueue> Get_CQueue( Factory *f1, Factory *f2, int& n)//vector<CQueue>& t,
 	pop_front(tmp);
 	//cout<<endl<<"WHY???"<<endl;
 	//t.push_back(x);
-	t[counter]=*CQueue::CreateData(type,ff);//create queue
+	*t[counter]=*CQueue::CreateData(type,ff);//create queue
 	cout<<endl<<"WHY???"<<endl;
-	t[counter].Init(tmp,file);
+	t[counter]->Init(tmp,file);
   }
   //if(counter==-1) return 0;
   
