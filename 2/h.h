@@ -11,6 +11,9 @@
 #include <queue>
 #include <string>
 #include <sstream>
+#include <random>
+#include <algorithm>
+#include <iterator>
 
 
 using namespace std;
@@ -89,11 +92,11 @@ struct FactoryChild2:public Factory{
 		return new Child2;
 	}
 };
-
+int pop_v(int &x);
 void pop_front(std::vector<int> &v);
 vector<vector<int>> read_vectors(istream &is);
 vector<int> read_vector(istream &is);
-vector<CQueue> Get_CQueue(Factory *f1, Factory *f2, int& n);
+vector<CQueue*> Get_CQueue(Factory *f1, Factory *f2, int& n);
 
 
 

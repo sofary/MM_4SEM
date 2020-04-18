@@ -83,10 +83,17 @@ int CQueue::size()
 
 void CQueue::out()
   {
-	Child1 tmp=*this;
-	int use;
-	while(tmp.pop(use)==1)
-	cout<<use<<" ";
+	queue<int> W;
+	W=Q;
+	vector<int> vec;
+	for(int i=0;i<Q.size();i++)
+	{
+	vec.push_back(W.front());
+	W.pop();
+	}
+
+	for ( int n : vec ) 
+        cout << n << '\n';
 	cout<<endl<<endl;
   }
 
@@ -139,10 +146,9 @@ void pop_front(std::vector<int> &v)
 
 
 
-vector<CQueue*> Get_CQueue( Factory *f1, Factory *f2, int& n)//vector<CQueue>& t,
+vector<CQueue*> Get_CQueue( Factory *f1, Factory *f2, int& n)
 {
   Factory *ff[2]={f1,f2};
-  Child1 x;
   vector<int> tmp;
   int file, type;
   ifstream is("max.txt");
@@ -152,7 +158,7 @@ vector<CQueue*> Get_CQueue( Factory *f1, Factory *f2, int& n)//vector<CQueue>& t
 //первый вектор - одно число очередей в файле
   n=data[0][0];
   vector<CQueue*> t=vector<CQueue*>(n);
-  for(int i=0;i<data.size()-1; i++)
+  for(int i=0;i<n; i++)
   {
 	counter++;
 	tmp=data[i];//vector for this queue
@@ -160,13 +166,11 @@ vector<CQueue*> Get_CQueue( Factory *f1, Factory *f2, int& n)//vector<CQueue>& t
 	file=tmp[1];
 	pop_front(tmp);
 	pop_front(tmp);
-	//cout<<endl<<"WHY???"<<endl;
-	//t.push_back(x);
-	*t[counter]=*CQueue::CreateData(type,ff);//create queue
+	cout<<endl<<"WHY"<<endl;
+	t.push_back(CQueue::CreateData(type,ff));
 	cout<<endl<<"WHY???"<<endl;
-	t[counter]->Init(tmp,file);
+	(*t.end())->Init(tmp,file);
   }
-  //if(counter==-1) return 0;
   
   return t;
 }
@@ -221,14 +225,14 @@ Child2::Child2(const CQueue &otherQueue):CQueue (otherQueue){}
 CQueue::CQueue(CQueue &&arr): 
 Q(arr.Q), 
 name(arr.name)
-{     	
+{     	cout<<" per ";
 	arr.Del();
 	arr.name=nullptr;
 }
 
 //copy
 CQueue::CQueue(const CQueue &otherQueue)
-{
+{cout<<" cop ";
 Q=otherQueue.Q;
 name="22.txt";
 name[0]=(name[0]-'0')+(otherQueue.name[0]-'0')+'0';
@@ -240,7 +244,7 @@ name[1]=(name[1]-'0')+(otherQueue.name[1]-'0')+'0';
 
 CQueue& CQueue::operator=(CQueue &&arr) 
 {
-    //cout<<"abcd";
+    cout<<"=";
     this->Del();
     Q=arr.Q;
     arr.Del();
@@ -249,7 +253,7 @@ CQueue& CQueue::operator=(CQueue &&arr)
 
 CQueue&  CQueue::operator=(const  CQueue &obj)
     {
-//cout<<"=copy"<<endl;   
+cout<<"=copy"<<endl;   
 	if(this==&obj)
 		return *this;
         this->Del();
