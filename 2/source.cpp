@@ -126,11 +126,12 @@ vector<int> read_vector(istringstream  &is)
 vector<vector<int>> read_vectors(ifstream &is)
 {
   vector<vector<int>> data;
-  istringstream line_input;
+//  istringstream line_input;
   for (string line; getline(is, line);)
   {
-    line_input.str(line); // читать из строки line.
-    data.push_back(read_vector(line_input));
+  //  line_input.str(line); // читать из строки line.
+    istringstream ss(line);                          //cout<<line_input.str;
+    data.push_back(read_vector(ss));//line_input));
   }
   return data;
 }
@@ -146,7 +147,7 @@ void pop_front(std::vector<int> &v)
 
 
 
-vector<CQueue*> Get_CQueue( Factory *f1, Factory *f2, int& n)
+vector<CQueue*> Get_CQueue( Factory *f1, Factory *f2)
 {
   Factory *ff[2]={f1,f2};
   vector<int> tmp;
@@ -155,10 +156,8 @@ vector<CQueue*> Get_CQueue( Factory *f1, Factory *f2, int& n)
   int counter=-1;
   vector<vector<int>> data;
   data=read_vectors(is);
-//первый вектор - одно число очередей в файле
-  n=data[0][0];
-  vector<CQueue*> t=vector<CQueue*>(n);
-  for(int i=0;i<n; i++)
+  vector<CQueue*> t=vector<CQueue*>();
+  for(int i=0;i<data.size(); i++)
   {
 	counter++;
 	tmp=data[i];//vector for this queue
@@ -169,7 +168,8 @@ vector<CQueue*> Get_CQueue( Factory *f1, Factory *f2, int& n)
 	cout<<endl<<"WHY"<<endl;
 	t.push_back(CQueue::CreateData(type,ff));
 	cout<<endl<<"WHY???"<<endl;
-	(*t.end())->Init(tmp,file);
+	cout<<counter<<endl;
+	(*t.end()--)->Init(tmp,file);
   }
   
   return t;

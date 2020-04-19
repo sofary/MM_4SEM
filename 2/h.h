@@ -96,7 +96,7 @@ int pop_v(int &x);
 void pop_front(std::vector<int> &v);
 vector<vector<int>> read_vectors(istream &is);
 vector<int> read_vector(istream &is);
-vector<CQueue*> Get_CQueue(Factory *f1, Factory *f2, int& n);
+vector<CQueue*> Get_CQueue(Factory *f1, Factory *f2);
 
 
 

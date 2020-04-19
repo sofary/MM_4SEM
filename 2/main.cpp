@@ -3,9 +3,8 @@
 int main()
 {//////////на первой строке нет числа очередей и 3е число не отвечает за длину
   Factory *f[2]={new FactoryChild1(),new FactoryChild2()};
-  int n;
-  vector<CQueue*> t=Get_CQueue(f[0], f[1], n); 
-  
+  vector<CQueue*> t=Get_CQueue(f[0], f[1]); 
+  int n=t.size();
   if(n==-1) return 0;
   Child2 pp;
   cout<<endl<<"all queue before shift"<<endl;
