@@ -10,7 +10,7 @@ int main()
   cout<<endl<<"all queue before shift"<<endl;
   for(CQueue* n : t)	n->out();
   cout<<endl<<"_____________________________________"<<endl;
-  rotate(t.begin(), t.begin() + 1, t.end()); // ciklicheskiy' sdvig vectora na 1
+  rotate(t.begin(), t.begin() + 1, t.end()); 
 
   for(CQueue* n:t) 
 	n->out_file();

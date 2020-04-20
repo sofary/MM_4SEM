@@ -93,7 +93,7 @@ void CQueue::out()
 	}
 
 	for ( int n : vec ) 
-        cout << n << '\n';
+        cout << n <<" ";
 	cout<<endl<<endl;
   }
 
@@ -118,7 +118,7 @@ vector<int> read_vector(istringstream  &is)
 {
   vector<int> data;
   for (int x; is >> x;)
-    {data.push_back(x); cout<<" "<<x<<" ";}
+    {data.push_back(x); /*cout<<" "<<x<<" ";*/}
   return data;
 }
 
@@ -126,12 +126,10 @@ vector<int> read_vector(istringstream  &is)
 vector<vector<int>> read_vectors(ifstream &is)
 {
   vector<vector<int>> data;
-//  istringstream line_input;
   for (string line; getline(is, line);)
   {
-  //  line_input.str(line); // читать из строки line.
-    istringstream ss(line);                          //cout<<line_input.str;
-    data.push_back(read_vector(ss));//line_input));
+    istringstream ss(line);
+    data.push_back(read_vector(ss));
   }
   return data;
 }
@@ -143,9 +141,6 @@ void pop_front(std::vector<int> &v)
         v.erase(v.begin());
     }
 }
-
-
-
 
 vector<CQueue*> Get_CQueue( Factory *f1, Factory *f2)
 {
@@ -160,16 +155,14 @@ vector<CQueue*> Get_CQueue( Factory *f1, Factory *f2)
   for(int i=0;i<data.size(); i++)
   {
 	counter++;
-	tmp=data[i];//vector for this queue
+	tmp=data[i];
 	type=tmp[0];
 	file=tmp[1];
 	pop_front(tmp);
 	pop_front(tmp);
-	cout<<endl<<"WHY"<<endl;
 	t.push_back(CQueue::CreateData(type,ff));
-	cout<<endl<<"WHY???"<<endl;
-	cout<<counter<<endl;
-	(*t.end()--)->Init(tmp,file);
+	//cout<<counter<<endl;
+	(*(t.end()-1))->Init(tmp,file);
   }
   
   return t;
