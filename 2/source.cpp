@@ -18,12 +18,29 @@ void CQueue::Init(vector<int> arr, int NN)
 	int a=NN%10, b=(NN/10) % 10;
 	char aa=a+'0';
 	char bb=b+'0';
-	name[0]=aa;
-	name[1]=bb; 
+	name[0]=bb;
+	name[1]=aa; 
 
 	for(int i=0;i<arr.size();i++)
 		Q.push(arr[i]);
   }
+
+/*
+
+void CQueue::Init1(CQueue CQ)
+  {
+	name="fl.txt";
+	int a=NN%10, b=(NN/10) % 10;
+	char aa=a+'0';
+	char bb=b+'0';
+	name[0]=bb;
+	name[1]=aa; 
+
+	for(int i=0;i<arr.size();i++)
+		Q.push(arr[i]);
+  }
+
+*/
 
 void CQueue::Del()
   {
@@ -35,6 +52,7 @@ void CQueue::Del()
 CQueue::~CQueue()
   {
 	this->Del();
+	name.clear();
   }
 
 
@@ -102,18 +120,6 @@ void CQueue::out()
 //functions without class//
 ///////////////////////////
 
-int Perevert(int x)
-{
-	int y = 0;
-	while(x)
-	{
-		y = y*10 + x%10;
-		x /= 10;
-	}
-	return y;
-}
-
-//////////////////////////////////////////
 vector<int> read_vector(istringstream  &is)
 {
   vector<int> data;
@@ -161,7 +167,6 @@ vector<CQueue*> Get_CQueue( Factory *f1, Factory *f2)
 	pop_front(tmp);
 	pop_front(tmp);
 	t.push_back(CQueue::CreateData(type,ff));
-	//cout<<counter<<endl;
 	(*(t.end()-1))->Init(tmp,file);
   }
   
@@ -199,33 +204,26 @@ Child2::Child2(string n) :CQueue(n) {}
 
  void Child2::out_file()
 {
-	ofstream fout;
-	fout.open(name);
-	fout<<"CHILD2"<<endl;
-	Child2 tmp;
-	int use;
-	while(tmp.pop(use)==1)
-	  fout<<" "<<use<<" ";
-	fout <<endl;
-	fout.close();
+  ofstream fout;
+  fout.open(name);    
+  fout<<"CHILD2"<<endl;
+  Child2 tmp=*this;
+  int use;
+  while(tmp.pop(use)==1)
+    fout << use<< endl;
+
+  fout<<endl;
+  fout.close();
 }
 
 
 Child2::Child2(const CQueue &otherQueue):CQueue (otherQueue){}
 
 
-//peremesh'enie
-CQueue::CQueue(CQueue &&arr): 
-Q(arr.Q), 
-name(arr.name)
-{     	cout<<" per ";
-	arr.Del();
-	arr.name=nullptr;
-}
 
 //copy
 CQueue::CQueue(const CQueue &otherQueue)
-{cout<<" cop ";
+{//cout<<" cop ";
 Q=otherQueue.Q;
 name="22.txt";
 name[0]=(name[0]-'0')+(otherQueue.name[0]-'0')+'0';
@@ -233,41 +231,33 @@ name[1]=(name[1]-'0')+(otherQueue.name[1]-'0')+'0';
 
 }
 
-////////////////////////////////////////
 
-CQueue& CQueue::operator=(CQueue &&arr) 
-{
-    cout<<"=";
-    this->Del();
-    Q=arr.Q;
-    arr.Del();
-    return *this;
-}
 
 CQueue&  CQueue::operator=(const  CQueue &obj)
     {
-cout<<"=copy"<<endl;   
+//cout<<"=copy"<<endl;   
 	if(this==&obj)
 		return *this;
         this->Del();
 	Q=obj.Q;
 	name=obj.name;
-this->out();
+//this->out();
 return *this;
     }
 //////////////////////////////////////
 
 Child1 operator+(const CQueue &obj1, const CQueue &obj2)
 {
+
 int a=obj1.name[0]-'0'+obj2.name[0]-'0';
 int b=obj1.name[1]-'0'+obj2.name[1]-'0';
 string NName=obj1.name;
 NName[0]=a+'0';
-NName[1]=b+'0';
 Child1 r(obj1.name);
 int usless1=0, usless2=0;
     Child1 obj11(obj1);
     Child1 obj22(obj2);
+
    if(obj11.isempty()==0)
    {while(obj11.pop(usless1))
     {  

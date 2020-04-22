@@ -34,7 +34,7 @@ class CQueue
     CQueue();
     virtual ~CQueue() ;
     CQueue(string n) ;
-    CQueue(CQueue &&arr);
+
     int push ( int num ) ;
     int pop(int &num);
     virtual void out();
@@ -46,7 +46,7 @@ class CQueue
     int back();
     int size();
     CQueue(const CQueue &obj);
-    CQueue& operator=(CQueue &&arr);//= peemesh'enie
+
     CQueue&  operator=(const  CQueue &obj);
     static CQueue* CreateData(int Type,  Factory **);
 };
