@@ -25,22 +25,7 @@ void CQueue::Init(vector<int> arr, int NN)
 		Q.push(arr[i]);
   }
 
-/*
 
-void CQueue::Init1(CQueue CQ)
-  {
-	name="fl.txt";
-	int a=NN%10, b=(NN/10) % 10;
-	char aa=a+'0';
-	char bb=b+'0';
-	name[0]=bb;
-	name[1]=aa; 
-
-	for(int i=0;i<arr.size();i++)
-		Q.push(arr[i]);
-  }
-
-*/
 
 void CQueue::Del()
   {
@@ -225,9 +210,9 @@ Child2::Child2(const CQueue &otherQueue):CQueue (otherQueue){}
 CQueue::CQueue(const CQueue &otherQueue)
 {//cout<<" cop ";
 Q=otherQueue.Q;
-name="22.txt";
-name[0]=(name[0]-'0')+(otherQueue.name[0]-'0')+'0';
-name[1]=(name[1]-'0')+(otherQueue.name[1]-'0')+'0';
+name=otherQueue.name;
+//name[0]=(name[0]-'0')+(otherQueue.name[0]-'0')+'0';
+//name[1]=(name[1]-'0')+(otherQueue.name[1]-'0')+'0';
 
 }
 
